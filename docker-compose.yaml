@@ -1,0 +1,24 @@
+version: "3"
+services:
+  backend:
+    image: "kvbdev/cloudservice-rest"
+    build: "."
+    container_name: "cloudservice-rest"
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./appdata/userfiles:/app/appdata/userfiles"
+      - "./appdata/keys:/app/appdata/keys"
+    expose:
+      - "8080"
+    depends_on:
+      - "dbserver"
+  dbserver:
+    image: "postgres:latest"
+    container_name: "cloudservice-dbserver"
+    volumes:
+      - "./appdata/db-data/:/var/lib/postgresql/data/"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "cloudservice"
