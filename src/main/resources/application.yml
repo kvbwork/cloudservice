@@ -1,0 +1,20 @@
+application:
+  security:
+    cors:
+      permit-all: true
+    token:
+      header: auth-token
+    jwt:
+      secret:
+        file: "file:appdata/keys/jwt-secret.dat"
+      algorithm: HS256
+      valid-hours: 240
+  userfiles:
+    root-path: "appdata/userfiles"
+
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 110MB
